@@ -12,6 +12,8 @@ type (
 	StatusType int
 
 	InventoryMode int
+
+	MonitoredBy int
 )
 
 const (
@@ -34,6 +36,12 @@ const (
 	Monitored StatusType = 0
 	// Unmonitored unmonitored host
 	Unmonitored StatusType = 1
+)
+
+const (
+	MonitoredByZabbixServer MonitoredBy = 0
+	MonitoredByProxy        MonitoredBy = 1
+	MonitoredByProxyGroup   MonitoredBy = 2
 )
 
 // Host represent Zabbix host object
@@ -60,7 +68,8 @@ type Host struct {
 	TemplateIDsClear TemplateIDs    `json:"templates_clear,omitempty"`
 	// templates are read back from this one
 	ParentTemplateIDs TemplateIDs `json:"parentTemplates,omitempty"`
-	ProxyID           string      `json:"proxy_hostid,omitempty"`
+	MonitoredBy       MonitoredBy `json:"monitored_by,omitempty"`
+	ProxyID           string      `json:"proxyid,omitempty"`
 	Tags              Tags        `json:"tags,omitempty"`
 }
 
